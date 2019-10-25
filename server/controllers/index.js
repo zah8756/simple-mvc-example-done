@@ -155,7 +155,6 @@ const hostPage3 = (req, res) => {
 };
 
 const hostPage4 = (req, res) => {
-
   const callback = (err, docs) => {
     if (err) {
       return res.json({ err }); // if error, return it
@@ -307,7 +306,6 @@ const searchName = (req, res) => {
 };
 
 const searchDogName = (req, res) => {
-
   if (!req.query.name) {
     return res.json({ error: 'Name is required to perform a search' });
   }
@@ -327,14 +325,18 @@ const searchDogName = (req, res) => {
     // if a match, send the match back
     // req.age++;
     dNumber.age++;
-      
+
     const savePromise = dNumber.save();
 
     // return res.json({ name: doc.name, age: lastDogAdded.age, breed: doc.breed });
 
 
     // send back the name as a success for now
-    savePromise.then(() => res.json({ name: dNumber.name, age: dNumber.age, breed: dNumber.breed }));
+    savePromise.then(() => res.json({
+      name: dNumber.name,
+      age: dNumber.age,
+      breed: dNumber.breed,
+    }));
 
     return savePromise.catch((error) => res.json({ error }));
   });
